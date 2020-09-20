@@ -1,5 +1,6 @@
-package com.ifood.demo.client;
+package com.ifood.client.event;
 
+import com.ifood.client.document.Client;
 import org.springframework.data.rest.core.annotation.HandleAfterCreate;
 import org.springframework.data.rest.core.annotation.HandleAfterDelete;
 import org.springframework.data.rest.core.annotation.HandleAfterSave;

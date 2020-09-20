@@ -1,4 +1,4 @@
-package com.ifood.demo.client;
+package com.ifood.client.document;
 
 import java.util.UUID;
 
@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class Client {
 
-	private @Id @GeneratedValue UUID id;
+	private @Id	@GeneratedValue UUID id;
 	private final String name;
 	private final String email;
 	private final String phone;

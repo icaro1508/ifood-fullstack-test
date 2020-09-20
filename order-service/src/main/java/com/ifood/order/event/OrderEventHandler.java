@@ -1,5 +1,6 @@
-package com.ifood.demo.order;
+package com.ifood.order.event;
 
+import com.ifood.order.document.Order;
 import org.springframework.data.rest.core.annotation.HandleAfterCreate;
 import org.springframework.data.rest.core.annotation.HandleAfterDelete;
 import org.springframework.data.rest.core.annotation.HandleAfterSave;

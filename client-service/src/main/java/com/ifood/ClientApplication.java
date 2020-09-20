@@ -1,14 +1,16 @@
-package com.ifood.demo;
+package com.ifood;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import com.ifood.demo.client.ClientEventHandler;
+import com.ifood.client.event.ClientEventHandler;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @SpringBootApplication
-@EnableJpaRepositories("com.ifood.demo")
+@EnableMongoRepositories("com.ifood.client.repository")
+@EnableDiscoveryClient
 public class ClientApplication {
 	
 	public static void main(String[] args) {

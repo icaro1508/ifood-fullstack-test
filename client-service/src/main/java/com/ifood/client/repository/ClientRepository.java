@@ -1,8 +1,9 @@
-package com.ifood.demo.client;
+package com.ifood.client.repository;
 
 import java.util.Collection;
 import java.util.UUID;
 
+import com.ifood.client.document.Client;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RestResource;

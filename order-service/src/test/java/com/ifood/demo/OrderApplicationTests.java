@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.ifood.demo.order.Order;
-import com.ifood.demo.order.Order.Item;
-import com.ifood.demo.order.OrderRepository;
+import com.ifood.order.document.Order;
+import com.ifood.order.document.Order.Item;
+import com.ifood.order.repository.OrderRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
