@@ -10,7 +10,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @SpringBootApplication
 @EnableMongoRepositories("com.ifood.client.repository")
-@EnableDiscoveryClient
 public class ClientApplication {
 	
 	public static void main(String[] args) {

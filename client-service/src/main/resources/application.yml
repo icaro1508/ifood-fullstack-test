@@ -1,12 +1,9 @@
 server:
-  port: 8081
+  port: ${SERVICE_PORT:8081}
 
 spring:
   application:
     name: client-service
-  data:
-    rest:
-      basePath: /v1
     mongodb:
       uri: mongodb://localhost/clients
 
