@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Data;
@@ -13,14 +13,13 @@ import lombok.RequiredArgsConstructor;
 @Data
 @Document
 @RequiredArgsConstructor
-public class Order {	
+public class Order {
 	
-	private @Id
-	UUID id = UUID.randomUUID();
+	private @Id UUID id = UUID.randomUUID();
 	private final UUID clientId;
 	private final UUID restaurantId;
 	private final Date createdAt;
-	private final Date confirmedAt;	
+	private final Date confirmedAt;
 	private final List<Item> items;
 	
 	@Data
@@ -28,7 +27,7 @@ public class Order {
 	public static class Item {
 
 		private final String description;
-		private final Integer quantity;		
+		private final Integer quantity;
 		private final Double price;
 	}
 }

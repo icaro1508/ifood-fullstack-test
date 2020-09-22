@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Data
 @Builder
-public class OrderDto {
+public class OrderDetails {
 	
 	private UUID id;
 	private final UUID clientId;
