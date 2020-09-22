@@ -18,4 +18,10 @@ public interface ClientRepository extends MongoRepository<Client, String> {
 	
 	@RestResource(path = "byEmail")
 	Collection<Client> findByEmailIgnoreCaseContaining(@Param("email") String email);
+	
+	@RestResource(path = "byNameAndPhoneAndEmail")
+	Collection<Client> findByNameIgnoreCaseContainingAndPhoneIgnoreCaseContainingAndEmailIgnoreCaseContaining(
+			@Param("name") String name,
+			@Param("phone") String phone,
+			@Param("email") String  email);
 }
