@@ -16,7 +16,7 @@ spring:
         - id: order-service-route
           uri: lb://order-service
           predicates:
-            - Path=/api/orders
+            - Path=/api/v1/orders
           filters:
             - name: CircuitBreaker
               args:
@@ -24,7 +24,19 @@ spring:
             - name: Retry
               args:
                 methods: GET,POST,PUT,DELETE
-            - RewritePath=/api/orders(?<remaining>.*), /${remaining}
+            - RewritePath=/api(?<remaining>.*), /${remaining}
+        - id: client-service-route
+          uri: lb://client-service
+          predicates:
+            - Path=/api/v1/clients
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: myCircuitBreaker
+            - name: Retry
+              args:
+                methods: GET,POST,PUT,DELETE
+            - RewritePath=/api(?<remaining>.*), /${remaining}
 
 # Enabling Actuator endpoints
 management:
