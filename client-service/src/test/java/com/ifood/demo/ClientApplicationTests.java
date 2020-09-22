@@ -1,14 +1,12 @@
 package com.ifood.demo;
 
-import org.junit.Assert;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.ifood.client.document.Client;
@@ -42,25 +40,25 @@ public class ClientApplicationTests {
 		clientRepository.save(new Client("Betty Boo", "betty@boo.com", "23458765"));
 		
 		List<Client> clients = clientRepository.findAll();
-		Assertions.assertEquals(4, clients.size());
+		assertEquals(4, clients.size());
 	}
 	
 	@Test
 	public void shouldFilterClientsByName() {
 		Collection<Client> nameFilteredClients = clientRepository.findByNameIgnoreCaseContaining("doe");
-		Assertions.assertEquals(2, nameFilteredClients.size());
+		assertEquals(2, nameFilteredClients.size());
 	}
 	
 	@Test
 	public void shouldFilterClientsByPhone() {
 		Collection<Client> nameFilteredClients = clientRepository.findByPhoneIgnoreCaseContaining("23458765");
-		Assertions.assertEquals(2, nameFilteredClients.size());
+		assertEquals(2, nameFilteredClients.size());
 	}
 	
 	@Test
 	public void shouldFilterClientsByEmail() {
 		Collection<Client> nameFilteredClients = clientRepository.findByEmailIgnoreCaseContaining("doe");
-		Assertions.assertEquals(2, nameFilteredClients.size());
+		assertEquals(2, nameFilteredClients.size());
 	}
 
 }

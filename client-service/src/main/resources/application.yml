@@ -4,6 +4,9 @@ server:
 spring:
   application:
     name: client-service
+  data:
+    rest:
+      basePath: /v1
     mongodb:
       uri: mongodb://localhost/clients
 
