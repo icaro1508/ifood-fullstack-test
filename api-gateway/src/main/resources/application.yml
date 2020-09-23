@@ -11,12 +11,17 @@ spring:
       discovery:
         locator:
           enabled: true
-          lower-case-service-id: true
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
       routes:
         - id: order-service-route
           uri: lb://order-service
           predicates:
-            - Path=/api/v1/orders
+            - Path=/api/v1/orders/**
           filters:
             - name: CircuitBreaker
               args:
@@ -28,7 +33,7 @@ spring:
         - id: client-service-route
           uri: lb://client-service
           predicates:
-            - Path=/api/v1/clients
+            - Path=/api/v1/clients/**
           filters:
             - name: CircuitBreaker
               args:
