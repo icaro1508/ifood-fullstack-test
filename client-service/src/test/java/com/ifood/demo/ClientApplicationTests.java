@@ -39,8 +39,12 @@ public class ClientApplicationTests {
 		clientRepository.save(new Client("Billy Bob", "billy@bob.com", "23458765"));
 		clientRepository.save(new Client("Betty Boo", "betty@boo.com", "23458765"));
 		
-		List<Client> clients = clientRepository.findAll();
-		assertEquals(4, clients.size());
+		Iterable<Client> clients = clientRepository.findAll();
+		int clientsCount = 0;
+		for (Client client : clients) {
+			clientsCount++;
+		}
+		assertEquals(4, clientsCount);
 	
 		Collection<Client> nameFilteredClients = clientRepository.findByNameIgnoreCaseContaining("DOE");
 		assertEquals(2, nameFilteredClients.size());

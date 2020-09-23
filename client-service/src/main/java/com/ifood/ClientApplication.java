@@ -1,5 +1,7 @@
 package com.ifood;
 
+import com.ifood.client.document.Client;
+import com.ifood.client.repository.ClientRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;

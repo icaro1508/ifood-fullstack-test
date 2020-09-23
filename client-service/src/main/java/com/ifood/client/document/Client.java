@@ -1,15 +1,21 @@
 package com.ifood.client.document;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.Setter;
+import lombok.With;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.UUID;
 
+@With
 @Entity
 @Data
+@Builder
+@AllArgsConstructor
 public class Client {
 	
-	@Id private String id;
+	@Id private UUID id = UUID.randomUUID();
 	private String name;
 	private String email;
 	private String phone;
