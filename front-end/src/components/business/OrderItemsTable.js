@@ -2,41 +2,29 @@ import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 
 import Table, { HeaderFactory } from 'components/Table'
+import useFormatCurrency from 'hooks/useFormatCurrency'
 
 const OrderItemsTable = ({ items }) => {
     const factory = new HeaderFactory()
+    const currencyFormatter = useFormatCurrency()
+
     const headers = useMemo(() => [
-        factory.buildHeader('Description', 'description'),
-        factory.buildHeader('Quantity', 'quantity'),
-        factory.buildHeader('Unit Price', 'unitPrice'),
-        factory.buildHeader('Total', 'total')
+        factory.buildHeader({ text: 'Description', key: 'description' }),
+        factory.buildHeader({ text: 'Quantity', key: 'quantity' }),
+        factory.buildHeader({ text: 'Unit Price', key: 'unitPrice', renderFn: ({ value }) => <Table.Cell>{currencyFormatter(value)}</Table.Cell> }),
+        factory.buildHeader({ text: 'Total', key: 'total' }),
     ], [factory])
 
     return (
         <Table
             headers={headers}
             rows={items}
-            render={({ headers, rows }) => (
-                <>
-                    <Table.Head>
-                        <Table.Row>
-                            {headers.map(header => header.rendered ? <Table.Header key={header.key}>{header.text}</Table.Header> : null)}
-                        </Table.Row>
-                    </Table.Head>
-                    <Table.Body>
-                        {rows.map(item => (
-                            <Table.Row>
-                                {headers.map(header => header.rendered ? <Table.Cell>{item[header.key]}</Table.Cell> : null)}
-                            </Table.Row>
-                        ))}
-                    </Table.Body>
-                </>
-            )} />
+        />
     )
 }
 
 OrderItemsTable.propTypes = {
-    items: PropTypes.object
+    items: PropTypes.array
 }
 OrderItemsTable.defaultProps = {
     items: []

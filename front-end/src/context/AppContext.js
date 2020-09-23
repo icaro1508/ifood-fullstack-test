@@ -2,7 +2,7 @@ import React from 'react'
 
 const initialState = {
     isOrderDetailsModalOpen: false,
-    orders: [{ whatever: 'jesuis', date: 'asd', id: '1' }],
+    orders: [],
     orderDetails: {}
 }
 

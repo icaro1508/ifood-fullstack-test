@@ -9,16 +9,26 @@ import Body from './Body'
 import Row from './Row'
 import Cell from './Cell'
 
-const Table = ({ render, headers, rows }) => {
+const Table = ({ headers, rows, rowOnClick }) => {
+
     return (
         <BootstrapTable striped bordered hover responsive>
-            {render({ headers, rows })}
+            <Table.Head>
+                <Table.Row>
+                    {headers.map(header => <Table.Header key={header.key}>{header.text}</Table.Header>)}
+                </Table.Row>
+            </Table.Head>
+            <Table.Body>
+                {rows.map(row =>
+                    <Table.Row key={row.id} onClick={() => rowOnClick(row)}>
+                        {headers.map(header => header.renderFn({ value: row[header.key], getCellId: () => `${row.id}:${header.key}` }))}
+                    </Table.Row>)}
+            </Table.Body>
         </BootstrapTable>
     )
 }
 
 Table.propTypes = {
-    render: PropTypes.func.isRequired,
     headers: PropTypes.array.isRequired,
     rows: PropTypes.array
 }
@@ -35,8 +45,11 @@ Table.Cell = Cell
 export default Table
 export { Head, Header, Body, Row }
 
-export class HeaderFactory {
-    buildHeader(text, key, rendered = true) {
-        return { text, key, rendered }
+class HeaderFactory {
+    buildHeader({ text, key, renderFn }) {
+        renderFn = renderFn || (({ value }) => <Table.Cell>{value}</Table.Cell>)
+        return { text, key, renderFn }
     }
 }
+
+export { HeaderFactory }

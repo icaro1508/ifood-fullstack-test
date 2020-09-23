@@ -1,66 +1,38 @@
 import React, { useCallback, useContext, useMemo } from 'react'
 
-import { AppContext } from 'context/AppContext'
+import { AppContext, actionCreators } from 'context/AppContext'
 import Table, { HeaderFactory } from 'components/Table'
+import useFormatCurrency from 'hooks/useFormatCurrency'
+
+import moment from 'moment'
 
 const OrdersTable = () => {
     const factory = new HeaderFactory()
+    const currencyFormatter = useFormatCurrency()
+
     const headers = useMemo(() => [
-        factory.buildHeader('id', 'id', false),
-        factory.buildHeader('Date', 'date'),
-        factory.buildHeader('Client Name', 'clientName'),
-        factory.buildHeader('Phone', 'phone'),
-        factory.buildHeader('E-mail', 'email'),
-        factory.buildHeader('Total Value', 'totalValue'),
-    ], [factory])
+        factory.buildHeader({ text: 'Date', key: 'createdAt', renderFn: ({ value }) => <Table.Cell>{moment(value).format('DD/MM')}</Table.Cell> }),
+        factory.buildHeader({ text: 'Client Name', key: 'clientName' }),
+        factory.buildHeader({ text: 'Phone', key: 'phone' }),
+        factory.buildHeader({ text: 'E-mail', key: 'email' }),
+        factory.buildHeader({ text: 'Total Value', key: 'totalValue', renderFn: ({ value }) => <Table.Cell>{currencyFormatter(value)}</Table.Cell> }),
+    ], [factory, currencyFormatter])
 
-    const { state, dispatch, actionCreators } = useContext(AppContext)
+    const { state, dispatch } = useContext(AppContext)
 
-    function fetchOrderDetails(orderId) {
-        //fetch data
-        Promise.resolve()
-            .then(() => {
-                dispatch(actionCreators.setOrderDetails({
-                    clientName: 'Jão',
-                    phone: '99999',
-                    email: 'mail@mail.com',
-                    items: [{
-                        description: 'Item 1',
-                        quantity: '1',
-                        unitPrice: '10 real',
-                        total: '10 real'
-                    }]
-                }))
-                dispatch(actionCreators.openOrderDetailsModal())
-            })
-    }
+    const openOrderDetails = useCallback((order) => {
+        console.log(order)
+        const { items, client } = order
+        dispatch(actionCreators.setOrderDetails({ ...client, items }))
+        dispatch(actionCreators.openOrderDetailsModal())
+    }, [dispatch])
 
     return (
         <Table
             headers={headers}
             rows={state.orders}
-            render={({ headers, rows }) => (
-                <>
-                    <Table.Head>
-                        <Table.Row>
-                            {headers.map(header => header.rendered ? <Table.Header key={header.key}>{header.text}</Table.Header> : null)}
-                        </Table.Row>
-                    </Table.Head>
-                    <Table.Body>
-                        {rows.map(order =>
-                            <Table.Row
-                                key={order.id}
-                                onClick={() => fetchOrderDetails(order.id)}
-                            >
-                                {headers.map(header =>
-                                    header.rendered ?
-                                        <Table.Cell key={`${order.id}:${header.key}`}>{order[header.key]}</Table.Cell>
-                                        : null)}
-                            </Table.Row>
-                        )}
-                    </Table.Body>
-                </>
-            )} />
+            rowOnClick={openOrderDetails}
+        />
     )
 }
 
