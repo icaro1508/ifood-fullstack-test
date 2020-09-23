@@ -1,10 +1,10 @@
 package com.ifood.order.dto;
 
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class Client {
 	private String id;
 	private String name;

@@ -1,7 +1,7 @@
 package com.ifood.order.repository;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Date;
 import java.util.UUID;
 
 import com.ifood.order.document.Order;
@@ -18,5 +18,5 @@ public interface OrderRepository extends CrudRepository<Order, UUID> {
 	Collection<Order> findByRestaurantId(@Param("restaurantId") UUID restaurantId);
 	
 	@RestResource(path = "byDate")
-	Collection<Order> findByCreatedAtBetween(@Param("start") Date start, @Param("end") Date end);
+	Collection<Order> findByCreatedAtBetween(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
 }

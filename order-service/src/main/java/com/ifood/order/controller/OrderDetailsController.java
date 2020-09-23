@@ -1,22 +1,18 @@
 package com.ifood.order.controller;
 
-import com.ifood.order.document.Order;
-import com.ifood.order.dto.Client;
 import com.ifood.order.dto.OrderDetails;
 import com.ifood.order.service.OrderDetailsService;
-import com.ifood.order.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -30,16 +26,13 @@ public class OrderDetailsController {
 		this.orderDetailsService = orderDetailsService;
 	}
 	
-	
-//	@GetMapping("/details")
-//	public ResponseEntity<List<OrderDetails>> fetchAllOrders(@PathVariable("orderId") UUID orderId) {
-//		ResponseEntity<Order> response = ResponseEntity.of(orderDetailsService.findAll(orderId));
-//		log.debug("Req: /order/{} | Res: statusCode={}", orderId.toString(), response.getStatusCode());
-//		return response;
-//	}
-	
-	@GetMapping("/details")
-	public Collection<Client> fetchAllOrders() {
-		return orderDetailsService.findAll();
+	@GetMapping("/search/list")
+	public @ResponseBody List<OrderDetails> fetchOrderListWithClientData(
+			@RequestParam(value = "after") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate after,
+			@RequestParam(value = "before") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate before,
+			@RequestParam(value = "name", required = false) String name,
+			@RequestParam(value = "phone", required = false) String phone,
+			@RequestParam(value = "email", required = false) String email) {
+		return orderDetailsService.findAll(after, before, name, phone, email);
 	}
 }

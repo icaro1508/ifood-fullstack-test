@@ -23,3 +23,10 @@ eureka:
 feign:
   hystrix:
     enabled: true
+
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb: DEBUG

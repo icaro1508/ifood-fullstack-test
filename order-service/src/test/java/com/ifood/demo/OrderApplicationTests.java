@@ -1,7 +1,7 @@
 package com.ifood.demo;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.UUID;
 
 import org.junit.Test;
@@ -28,13 +28,13 @@ public class OrderApplicationTests {
 
 		orderRepository.deleteAll();
 				
-		orderRepository.save(new Order(UUID.randomUUID(), UUID.randomUUID(), new Date(), null, 
+		orderRepository.save(new Order(UUID.randomUUID(), UUID.randomUUID(), LocalDateTime.now(), null,
 				Arrays.asList(
 						new Item("Item 1",1, 3.39),
 						new Item("Item 2",3, 1.5),
 						new Item("Item 3",1, 4.0))
 				));
-		orderRepository.save(new Order(UUID.randomUUID(), UUID.randomUUID(), new Date(), null, 
+		orderRepository.save(new Order(UUID.randomUUID(), UUID.randomUUID(), LocalDateTime.now(), null,
 				Arrays.asList(
 						new Item("Item A",2, 5.5),
 						new Item("Item B",2, 2.0))
