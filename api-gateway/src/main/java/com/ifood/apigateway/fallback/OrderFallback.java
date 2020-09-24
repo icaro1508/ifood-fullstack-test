@@ -1,6 +1,5 @@
 package com.ifood.apigateway.fallback;
 
-import com.google.inject.internal.cglib.core.$AbstractClassGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.http.ResponseEntity;

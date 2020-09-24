@@ -1,6 +1,5 @@
 package com.ifood.apigateway.config;
 
-import static io.github.resilience4j.circuitbreaker.CircuitBreakerConfig.from;
 import static io.github.resilience4j.circuitbreaker.CircuitBreakerConfig.ofDefaults;
 
 import io.github.resilience4j.timelimiter.TimeLimiterConfig;
