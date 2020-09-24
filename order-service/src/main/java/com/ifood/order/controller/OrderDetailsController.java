@@ -5,7 +5,6 @@ import com.ifood.order.service.OrderDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,6 +32,6 @@ public class OrderDetailsController {
 			@RequestParam(value = "name", required = false) String name,
 			@RequestParam(value = "phone", required = false) String phone,
 			@RequestParam(value = "email", required = false) String email) {
-		return orderDetailsService.findAll(after, before, name, phone, email);
+		return orderDetailsService.findFiltered(after, before, name, phone, email);
 	}
 }

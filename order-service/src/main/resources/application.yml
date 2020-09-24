@@ -9,6 +9,13 @@ spring:
       basePath: /v1
     mongodb:
       uri: mongodb://localhost/orders
+  cache:
+    type: redis
+    redis:
+      time-to-live: 30000
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
 
 eureka:
   instance:
@@ -28,5 +35,7 @@ logging:
   level:
     org:
       springframework:
+        cloud:
+          openfeign: DEBUG
         data:
           mongodb: DEBUG

@@ -1,12 +1,11 @@
 package com.ifood.order.event;
 
 import com.ifood.order.document.Order;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.rest.core.annotation.HandleAfterCreate;
 import org.springframework.data.rest.core.annotation.HandleAfterDelete;
 import org.springframework.data.rest.core.annotation.HandleAfterSave;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
-
-import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RepositoryEventHandler(Order.class)

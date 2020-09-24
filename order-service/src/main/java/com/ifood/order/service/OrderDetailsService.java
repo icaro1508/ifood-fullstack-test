@@ -1,6 +1,6 @@
 package com.ifood.order.service;
 
-import com.ifood.order.client.ClientClient;
+import com.ifood.order.client.CachedClientClient;
 import com.ifood.order.document.Order;
 import com.ifood.order.dto.Client;
 import com.ifood.order.dto.OrderDetails;
@@ -22,35 +22,37 @@ import java.util.stream.Collectors;
 public class OrderDetailsService {
 	
 	private final OrderRepository orderRepository;
-	private ClientClient clientClient;
+	private final CachedClientClient cachedClientClient;
 	
 	@Autowired
-	public OrderDetailsService(OrderRepository orderRepository, ClientClient clientClient) {
+	public OrderDetailsService(OrderRepository orderRepository, CachedClientClient cachedClientClient) {
 		this.orderRepository = orderRepository;
-		this.clientClient = clientClient;
+		this.cachedClientClient = cachedClientClient;
 	}
 	
-	public List<OrderDetails> findAll(LocalDate after, LocalDate before, String name, String phone, String email) {
+	public List<OrderDetails> findFiltered(LocalDate after, LocalDate before, String name, String phone, String email) {
 		Collection<Order> orders = this.orderRepository.findByCreatedAtBetween(after.atStartOfDay(), before.atTime(
 				LocalTime.MAX));
 		
 		// cache this
-		Map<String, Client> clients = clientClient
-				.findByNameAndPhoneAndEmail(name, phone, email).getContent()
+		Map<String, Client> clients = cachedClientClient
+				.findByNameAndPhoneAndEmail(name, phone, email)
 				.stream().collect(Collectors.toMap(Client::getId, Function.identity()));
 		
 		List<OrderDetails> ordersList = new ArrayList<>();
 		for( Order order : orders) {
-			Client orderClient = clients.get(order.getClientId());
-			ordersList.add(OrderDetails.builder()
-					.id(order.getId())
-					.createdAt(LocalDate.from(order.getCreatedAt()))
-					.client(orderClient)
-					.items(order.getItems())
-					.totalValue(order.getItems().stream()
-							.map(i -> i.getPrice())
-							.reduce(0.0, (sum, value) -> sum + value))
-					.build());
+			Client orderClient = clients.get(order.getClientId().toString());
+			if (orderClient != null) {
+				ordersList.add(OrderDetails.builder()
+						.id(order.getId())
+						.createdAt(LocalDate.from(order.getCreatedAt()))
+						.client(orderClient)
+						.items(order.getItems())
+						.totalValue(order.getItems().stream()
+								.map(i -> (i.getPrice() == null ? 0.0 : i.getPrice()) * i.getQuantity())
+								.reduce(0.0, Double::sum))
+						.build());
+			}
 		}
 		
 		return ordersList;

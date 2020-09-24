@@ -1,20 +1,17 @@
 package com.ifood.demo;
 
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.UUID;
-
+import com.ifood.order.document.Order;
+import com.ifood.order.document.Order.Item;
+import com.ifood.order.repository.OrderRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import com.ifood.order.document.Order;
-import com.ifood.order.document.Order.Item;
-import com.ifood.order.repository.OrderRepository;
-
-import lombok.extern.slf4j.Slf4j;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.UUID;
 
 @Slf4j
 @RunWith(SpringRunner.class)

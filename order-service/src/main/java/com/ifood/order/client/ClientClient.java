@@ -1,6 +1,7 @@
 package com.ifood.order.client;
 
 import com.ifood.order.dto.Client;
+import feign.hystrix.FallbackFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.hateoas.CollectionModel;
@@ -12,23 +13,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(
 		name = "client-service",
 		path = "/v1/clients",
-		fallback = ClientClient.ClientClientFallback.class
+		fallbackFactory = ClientClient.ClientClientFallbackFactory.class
 )
 public interface ClientClient {
 
-	@GetMapping(value = "/search/byNameAndPhoneAndEmail", consumes = "application/json")
-	CollectionModel<Client> findByNameAndPhoneAndEmail(@RequestParam(value = "name", defaultValue = "") String name,
-													   @RequestParam(value = "phone", defaultValue = "") String phone,
-													   @RequestParam(value = "email", defaultValue = "") String email);
+	@GetMapping
+	CollectionModel<Client> findByNameAndPhoneAndEmail(@RequestParam(value = "name") String name,
+													   @RequestParam(value = "phone") String phone,
+													   @RequestParam(value = "email") String email);
 	
 	@Slf4j
 	@Component
-	class ClientClientFallback implements ClientClient{
+	class ClientClientFallbackFactory implements FallbackFactory<ClientClient>{
 		
 		@Override
-		public CollectionModel<Client> findByNameAndPhoneAndEmail(String name, String phone, String email) {
-			log.info("Using client Fallback for params: {}, {}, {}", name, phone, email);
-			return CollectionModel.empty();
+		public ClientClient create(Throwable cause) {
+			log.info("Using fallback ClientClient for reason: {}, {}", cause.getMessage(), cause);
+			return new ClientClient() {
+				@Override
+				public CollectionModel<Client> findByNameAndPhoneAndEmail(String name, String phone, String email) {
+					return CollectionModel.empty();
+				}
+			};
 		}
 		
 	}

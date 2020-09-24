@@ -1,13 +1,12 @@
 package com.ifood.order.repository;
 
-import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.UUID;
-
 import com.ifood.order.document.Order;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RestResource;
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.UUID;
 
 public interface OrderRepository extends CrudRepository<Order, UUID> {
 
