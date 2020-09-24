@@ -1,15 +1,18 @@
 package com.ifood.client.document;
 
+import com.querydsl.core.annotations.QueryEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.With;
+import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.UUID;
 
+@QueryEntity
 @With
-@Entity
+@Document
 @Data
 @Builder
 @AllArgsConstructor

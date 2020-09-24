@@ -1,13 +1,9 @@
 package com.ifood;
 
-import com.ifood.client.document.Client;
-import com.ifood.client.repository.ClientRepository;
+import com.ifood.client.event.ClientEventHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
-
-import com.ifood.client.event.ClientEventHandler;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @SpringBootApplication
