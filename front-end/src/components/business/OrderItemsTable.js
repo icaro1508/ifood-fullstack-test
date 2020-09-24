@@ -11,14 +11,14 @@ const OrderItemsTable = ({ items }) => {
     const headers = useMemo(() => [
         factory.buildHeader({ text: 'Description', key: 'description' }),
         factory.buildHeader({ text: 'Quantity', key: 'quantity' }),
-        factory.buildHeader({ text: 'Unit Price', key: 'unitPrice', renderFn: ({ value }) => <Table.Cell>{currencyFormatter(value)}</Table.Cell> }),
-        factory.buildHeader({ text: 'Total', key: 'total' }),
-    ], [factory])
+        factory.buildHeader({ text: 'Unit Price', key: 'price', renderFn: ({ value }) => <Table.Cell>{currencyFormatter(value)}</Table.Cell> }),
+        factory.buildHeader({ text: 'Total', key: 'total', renderFn: ({ value }) => <Table.Cell>{currencyFormatter(value)}</Table.Cell> }),
+    ], [factory, currencyFormatter])
 
     return (
         <Table
             headers={headers}
-            rows={items}
+            rows={items.map(item => ({ ...item, total: item.quantity * item.price }))}
         />
     )
 }

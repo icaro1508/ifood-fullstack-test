@@ -1,6 +1,6 @@
 import React, { useCallback, useContext } from 'react';
 
-import { AppContext, actionCreators } from 'context/AppContext'
+import { actionCreators, AppContext } from 'context/AppContext'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -18,7 +18,6 @@ const Orders = () => {
     const { dispatch } = useContext(AppContext)
 
     const fetchOrders = useCallback(({ after, before, name, phone, email }) => {
-        console.log(after, before, name, phone, email)
         client(ORDERS_LIST, {
             params: {
                 after,

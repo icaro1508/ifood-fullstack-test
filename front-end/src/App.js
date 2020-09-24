@@ -1,8 +1,8 @@
-import React, { useReducer } from 'react';
-import { AppContext } from 'context/AppContext'
-import './App.css';
+import React from 'react'
 
-import { initialState, reducer } from 'context/AppContext'
+import { useReducer } from 'react';
+import { AppContext, initialState, reducer } from 'context/AppContext'
+import './App.css';
 
 import Orders from 'components/Orders';
 

@@ -16,10 +16,10 @@ const OrderDetailsModal = () => {
                 <Modal.Title>Order Details</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <div className="d-flex justify-content-between">
-                    <span><strong>Name: </strong>{state.orderDetails.clientName}</span>
-                    <span><strong>Phone:</strong>{state.orderDetails.phone}</span>
-                    <span><strong>E-mail:</strong>{state.orderDetails.email}</span>
+                <div className="d-flex justify-content-between pb-3">
+                    <span><strong>Name: </strong>{state.orderDetails.name}</span>
+                    <span><strong>Phone: </strong>{state.orderDetails.phone}</span>
+                    <span><strong>E-mail: </strong>{state.orderDetails.email}</span>
                 </div>
                 <OrderItemsTable items={state.orderDetails.items} />
             </Modal.Body>

@@ -12,9 +12,9 @@ const OrdersTable = () => {
 
     const headers = useMemo(() => [
         factory.buildHeader({ text: 'Date', key: 'createdAt', renderFn: ({ value }) => <Table.Cell>{moment(value).format('DD/MM')}</Table.Cell> }),
-        factory.buildHeader({ text: 'Client Name', key: 'clientName' }),
-        factory.buildHeader({ text: 'Phone', key: 'phone' }),
-        factory.buildHeader({ text: 'E-mail', key: 'email' }),
+        factory.buildHeader({ text: 'Client Name', key: 'client', renderFn: ({ value }) => <Table.Cell>{(value?.name || '')}</Table.Cell> }),
+        factory.buildHeader({ text: 'Phone', key: 'client', renderFn: ({ value }) => <Table.Cell>{(value?.phone || '')}</Table.Cell> }),
+        factory.buildHeader({ text: 'E-mail', key: 'client', renderFn: ({ value }) => <Table.Cell>{(value?.email || '')}</Table.Cell> }),
         factory.buildHeader({ text: 'Total Value', key: 'totalValue', renderFn: ({ value }) => <Table.Cell>{currencyFormatter(value)}</Table.Cell> }),
     ], [factory, currencyFormatter])
 
@@ -30,7 +30,7 @@ const OrdersTable = () => {
     return (
         <Table
             headers={headers}
-            rows={state.orders}
+            rows={state.orders.map(order => ({ ...order }))}
             rowOnClick={openOrderDetails}
         />
     )
