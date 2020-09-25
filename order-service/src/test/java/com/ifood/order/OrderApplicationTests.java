@@ -1,4 +1,6 @@
-package com.ifood.demo;
+package com.ifood.order;
+
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 import com.ifood.order.document.Order;
 import com.ifood.order.document.Order.Item;
@@ -7,18 +9,26 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.UUID;
 
 @Slf4j
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = RANDOM_PORT)
 public class OrderApplicationTests {
 
-	@Autowired OrderRepository orderRepository;
+	@LocalServerPort
+	private int port;
+	
+	@Autowired
+	OrderRepository orderRepository;
 
 	@Test
 	public void orderTest() {

@@ -24,7 +24,6 @@ public class OrderDetailsService {
 	private final OrderRepository orderRepository;
 	private final CachedClientClient cachedClientClient;
 	
-	@Autowired
 	public OrderDetailsService(OrderRepository orderRepository, CachedClientClient cachedClientClient) {
 		this.orderRepository = orderRepository;
 		this.cachedClientClient = cachedClientClient;

@@ -1,9 +1,8 @@
-package com.ifood.demo;
+package com.ifood.order;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.ifood.client.document.Client;
-import com.ifood.client.document.QClient;
 import com.ifood.client.repository.ClientRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -11,7 +10,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import java.util.Collection;
 
 @Slf4j
 @RunWith(SpringRunner.class)

@@ -1,6 +1,7 @@
 package com.ifood.order.document;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.With;
@@ -12,6 +13,7 @@ import java.util.UUID;
 
 @With
 @Data
+@Builder
 @Document
 @RequiredArgsConstructor
 @AllArgsConstructor
