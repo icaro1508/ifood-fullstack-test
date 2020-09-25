@@ -1,3 +1,40 @@
+# Pre Requisites
+
+* Java 11
+* Docker + docker-compose
+* Maven 3.6.x
+* Node 12.x + NPM (if you want to build/run the front-end app locally)
+
+# Running the project
+
+All the created elements have their own Dockerfiles to build and deploy a the containers through the docker-compose configuration in the root of the repository. All you have to is execute the following steps:
+
+1.  Build the target jar files running
+
+```sh
+$ mvn clean package
+```
+
+2. Execute the `docker-compose.yml` file with the command
+
+```sh
+$ docker-compose up -d --build
+```
+
+These should build the corresponding docker images for each module and setting them up so they can communicate with each other appropriately. The following services are  accessible in the host machine through exposed ports: 
+
+* `front-end`: `http://localhost`
+* `api-gateway`: `http://localhost:8080/api/v1`
+* `service-registry`: `http://localhost:8761`
+
+# Overview of the Implemented Architecture
+
+![Iplemented Architecture](arch_overview.png)
+
+All services, aside from the front-end application, were develop in Java Spring projects.
+
+---
+
 # iFood Fullstack Test
 
 Create a web application that lists Orders according to some criteria. 

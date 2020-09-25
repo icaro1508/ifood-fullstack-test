@@ -7,8 +7,7 @@ WORKDIR /tmp/front-end
 
 COPY . .
 
-RUN echo $REACT_APP_API_BASE_URL && \
-    yarn install && \
+RUN yarn install && \
     yarn build && \
     rm -rf node_modules
 
