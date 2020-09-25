@@ -9,7 +9,7 @@ import Orders from 'components/Orders';
 function App() {
 
   const [state, dispatch] = useReducer(reducer, initialState)
-
+  console.log(process.env.NODE_ENV)
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <Orders />

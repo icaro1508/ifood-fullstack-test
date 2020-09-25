@@ -51,10 +51,13 @@ management:
         include: "*"
 
 eureka:
+  instance:
+    prefer-ip-address: true
   client:
     healthcheck:
       enabled: true
-    register-with-eureka: false
+    service-url:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
 
 ribbon:
   MaxAutoRetries: 0

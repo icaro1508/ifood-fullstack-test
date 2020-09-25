@@ -7,8 +7,6 @@ spring:
   data:
     rest:
       basePath: /v1
-    mongodb:
-      uri: ${MONGO_URI:mongodb://localhost/orders}
   cache:
     type: redis
     redis:

@@ -7,8 +7,6 @@ spring:
   data:
     rest:
       basePath: /v1
-    mongodb:
-      uri: mongodb://localhost/clients
 
 eureka:
   instance:

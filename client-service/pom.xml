@@ -33,6 +33,11 @@
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>de.flapdoodle.embed</groupId>
+			<artifactId>de.flapdoodle.embed.mongo</artifactId>
+		</dependency>
+
 		<!--	Querydsl	-->
 		<dependency>
 			<groupId>com.querydsl</groupId>
@@ -44,13 +49,6 @@
 			<groupId>com.querydsl</groupId>
 			<artifactId>querydsl-apt</artifactId>
 			<version>4.3.1</version>
-		</dependency>
-
-		<!--	Test Dependencies	-->
-		<dependency>
-			<groupId>de.flapdoodle.embed</groupId>
-			<artifactId>de.flapdoodle.embed.mongo</artifactId>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
