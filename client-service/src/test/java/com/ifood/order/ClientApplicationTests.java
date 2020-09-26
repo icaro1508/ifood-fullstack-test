@@ -21,6 +21,7 @@ public class ClientApplicationTests {
 	
 	@Test
 	public void clientServiceTest() {
+		clientRepository.deleteAll();
 		clientRepository.save(new Client("John Doe", "john@doe.com", "12345678"));
 		clientRepository.save(new Client("Mary Doe", "mary@doe.com", "12348765"));
 		clientRepository.save(new Client("Billy Bob", "billy@bob.com", "23458765"));
