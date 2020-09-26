@@ -8,6 +8,7 @@ import OrderItemsTable from 'components/business/OrderItemsTable'
 const OrderDetailsModal = () => {
     const { state, dispatch } = useContext(AppContext)
     const handleHide = useCallback(() => dispatch(actionCreators.closeOrderDetailsModal()), [dispatch])
+    console.log(state.orderDetails.name)
     return (
         <Modal
             show={state.isOrderDetailsModalOpen}

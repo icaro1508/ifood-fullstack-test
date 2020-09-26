@@ -11,11 +11,11 @@ const OrdersTable = () => {
     const currencyFormatter = useFormatCurrency()
 
     const headers = useMemo(() => [
-        factory.buildHeader({ text: 'Date', key: 'createdAt', renderFn: ({ value }) => <Table.Cell>{moment(value).format('DD/MM')}</Table.Cell> }),
-        factory.buildHeader({ text: 'Client Name', key: 'client', renderFn: ({ value }) => <Table.Cell>{(value?.name || '')}</Table.Cell> }),
-        factory.buildHeader({ text: 'Phone', key: 'client', renderFn: ({ value }) => <Table.Cell>{(value?.phone || '')}</Table.Cell> }),
-        factory.buildHeader({ text: 'E-mail', key: 'client', renderFn: ({ value }) => <Table.Cell>{(value?.email || '')}</Table.Cell> }),
-        factory.buildHeader({ text: 'Total Value', key: 'totalValue', renderFn: ({ value }) => <Table.Cell>{currencyFormatter(value)}</Table.Cell> }),
+        factory.buildHeader({ text: 'Date', key: 'createdAt', renderFn: ({ value, getCellId }) => <Table.Cell key={getCellId()}>{moment(value).format('DD/MM')}</Table.Cell> }),
+        factory.buildHeader({ text: 'Client Name', key: 'client', renderFn: ({ value, getCellId }) => <Table.Cell key={getCellId()}>{(value?.name || '')}</Table.Cell> }),
+        factory.buildHeader({ text: 'Phone', key: 'client', renderFn: ({ value, getCellId }) => <Table.Cell key={getCellId()}>{(value?.phone || '')}</Table.Cell> }),
+        factory.buildHeader({ text: 'E-mail', key: 'client', renderFn: ({ value, getCellId }) => <Table.Cell key={getCellId()}>{(value?.email || '')}</Table.Cell> }),
+        factory.buildHeader({ text: 'Total Value', key: 'totalValue', renderFn: ({ value, getCellId }) => <Table.Cell key={getCellId()}>{currencyFormatter(value)}</Table.Cell> }),
     ], [factory, currencyFormatter])
 
     const { state, dispatch } = useContext(AppContext)

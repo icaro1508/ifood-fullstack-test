@@ -19,9 +19,9 @@ const Table = ({ headers, rows, rowOnClick }) => {
                 </Table.Row>
             </Table.Head>
             <Table.Body>
-                {rows.map(row =>
-                    <Table.Row key={row.id} onClick={() => rowOnClick(row)}>
-                        {headers.map(header => header.renderFn({ value: row[header.key], getCellId: () => `${row.id}:${header.key}` }))}
+                {rows.map((row, index) =>
+                    <Table.Row key={`${row.id}:${index}`} onClick={() => rowOnClick(row)}>
+                        {headers.map((header, index) => header.renderFn({ value: row[header.key], getCellId: () => `${row.id}:${index}:${header.key}` }))}
                     </Table.Row>)}
             </Table.Body>
         </BootstrapTable>
@@ -47,7 +47,7 @@ export { Head, Header, Body, Row }
 
 class HeaderFactory {
     buildHeader({ text, key, renderFn }) {
-        renderFn = renderFn || (({ value }) => <Table.Cell>{value}</Table.Cell>)
+        renderFn = renderFn || (({ value, getCellId }) => <Table.Cell key={getCellId()}>{value}</Table.Cell>)
         return { text, key, renderFn }
     }
 }

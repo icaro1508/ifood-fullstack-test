@@ -36,7 +36,7 @@ const OrdersSearchForm = ({ onSubmit }) => {
     }, [onSubmit, after, before, name, phone, email])
 
     return (
-        <FormContainer className="border p-4">
+        <FormContainer className="orders-form border p-4">
             <Form>
                 <Container>
                     <Row>
@@ -62,26 +62,26 @@ const OrdersSearchForm = ({ onSubmit }) => {
                         </Col>
                         <Col className="col-12 col-sm-12 col-md-6 col-lg col-xl">
                             <Form.Group>
-                                <Form.Label>Client Name</Form.Label>
-                                <Form.Control type="text" value={name} onChange={updateClientNameCallBack} />
+                                <Form.Label htmlFor="orders-form-client-name">Client Name</Form.Label>
+                                <Form.Control id="orders-form-client-name" type="text" value={name} onChange={updateClientNameCallBack} />
                             </Form.Group>
                         </Col>
                         <Col className="col-12 col-sm-6 col-md-5 col-lg col-xl">
                             <Form.Group>
-                                <Form.Label>Phone</Form.Label>
-                                <Form.Control type="text" value={phone} onChange={updatePhoneCallBack} />
+                                <Form.Label htmlFor="orders-form-client-phone">Phone</Form.Label>
+                                <Form.Control id="orders-form-client-phone" type="text" value={phone} onChange={updatePhoneCallBack} />
                             </Form.Group>
                         </Col>
                         <Col className="col-12 col-sm-6 col-md-7 col-lg col-xl">
                             <Form.Group>
-                                <Form.Label>E-mail</Form.Label>
-                                <Form.Control type="text" value={email} onChange={updateEmailCallBack} />
+                                <Form.Label htmlFor="orders-form-client-email">E-mail</Form.Label>
+                                <Form.Control id="orders-form-client-email" type="text" value={email} onChange={updateEmailCallBack} />
                             </Form.Group>
                         </Col>
                     </Row>
                     <Row className="justify-content-end">
                         <Col className="col-4 col-sm-2">
-                            <Button onClick={callOnSubmit}>Search</Button>
+                            <Button className="orders-form-search-button" onClick={callOnSubmit}>Search</Button>
                         </Col>
                     </Row>
                 </Container>
